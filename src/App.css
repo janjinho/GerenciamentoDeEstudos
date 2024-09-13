@@ -1,38 +1,78 @@
-.App {
+body {
+  background-color: #e6f7ff; /* Azul claro */
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff; /* Fundo branco */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #ff0000; /* Vermelho vibrante para o título principal */
   text-align: center;
+  margin-bottom: 30px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.input-container {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 2px solid #ff4500; /* Bordas em vermelho */
+  border-radius: 5px;
+  background-color: #ffe6e6; /* Fundo suave em tom de vermelho claro */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h2 {
+  color: #ff4500; /* Laranja vibrante para os dias da semana */
+  margin-bottom: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.periodo-container {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ff4500; /* Bordas em vermelho */
+  border-radius: 5px;
+  background-color: #ffcccb; /* Fundo suave em tom de vermelho */
+}
+
+label {
+  display: inline-block;
+  width: 100px;
+  color: #d9534f; /* Vermelho escuro para os rótulos */
+}
+
+input[type="text"],
+select {
+  width: calc(100% - 110px);
+  padding: 8px;
+  border: 1px solid #d9534f; /* Bordas do campo de texto em vermelho */
+  border-radius: 5px;
+  background-color: #ffe4e1; /* Fundo suave no campo de entrada */
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: #ff6347; /* Realce da borda ao focar */
+  outline: none;
+}
+
+button {
+  background-color: #ff4500; /* Vermelho */
   color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:hover {
+  background-color: #dc143c; /* Vermelho escuro */
 }
