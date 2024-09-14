@@ -1,5 +1,5 @@
 body {
-  background-color: #e6f7ff; /* Azul claro */
+  background-color: #f0f8ff; /* Azul claro */
   color: #333;
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -7,72 +7,99 @@ body {
 }
 
 .app-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 50px auto;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #fff; /* Fundo branco */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  color: #ff0000; /* Vermelho vibrante para o título principal */
+  color: #ff4500; /* Cor vibrante para o título */
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  font-size: 36px;
 }
 
 .input-container {
-  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 2px solid #ff4500;
+  border-radius: 10px;
+  background-color: #ffe6e6;
+  justify-content: space-between;
+}
+
+.input-container label {
+  flex-basis: 100%;
+  font-weight: bold;
+  color: #333;
+}
+
+.input-container select,
+.input-container input {
+  flex-basis: 100%;
   padding: 10px;
-  border: 2px solid #ff4500; /* Bordas em vermelho */
+  border: 2px solid #d9534f;
   border-radius: 5px;
-  background-color: #ffe6e6; /* Fundo suave em tom de vermelho claro */
-}
-
-h2 {
-  color: #ff4500; /* Laranja vibrante para os dias da semana */
-  margin-bottom: 10px;
-}
-
-.periodo-container {
-  margin-bottom: 10px;
-  padding: 5px;
-  border: 1px solid #ff4500; /* Bordas em vermelho */
-  border-radius: 5px;
-  background-color: #ffcccb; /* Fundo suave em tom de vermelho */
-}
-
-label {
-  display: inline-block;
-  width: 100px;
-  color: #d9534f; /* Vermelho escuro para os rótulos */
-}
-
-input[type="text"],
-select {
-  width: calc(100% - 110px);
-  padding: 8px;
-  border: 1px solid #d9534f; /* Bordas do campo de texto em vermelho */
-  border-radius: 5px;
-  background-color: #ffe4e1; /* Fundo suave no campo de entrada */
-}
-
-input[type="text"]:focus,
-select:focus {
-  border-color: #ff6347; /* Realce da borda ao focar */
-  outline: none;
-}
-
-button {
-  background-color: #ff4500; /* Vermelho */
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  background-color: #fff5f5;
   font-size: 16px;
 }
 
+button {
+  flex-basis: 100%;
+  background-color: #ff4500;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
 button:hover {
-  background-color: #dc143c; /* Vermelho escuro */
+  background-color: #dc143c;
+}
+
+.dia-container {
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #ff6347; /* Cor laranja para os dias da semana */
+  margin-bottom: 15px;
+  font-size: 28px;
+  text-align: center;
+}
+
+.periodo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #ffebeb;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.periodo-container strong {
+  color: #d9534f;
+  font-size: 18px;
+}
+
+.periodo-container div {
+  flex-grow: 1;
+  padding-left: 15px;
+  font-size: 16px;
+}
+.button-remover {
+  flex-basis: 5%;
+  font-family: 'Times New Roman', Times, serif;
 }

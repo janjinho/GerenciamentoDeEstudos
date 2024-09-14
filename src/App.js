@@ -32,10 +32,25 @@ function App() {
     // Limpar os campos após adicionar
     setAtividade('');
   };
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      adicionarAtividade();
+    }
+  };
+const removerAtividade = (dia, periodo) => {
+  setEstudos((prevEstudos) => ({
+    ...prevEstudos,
+    [dia]: {
+      ...prevEstudos[dia],
+      [periodo]: '',
+    },
+  }));
+};
+
 
   return (
     <div className="app-container">
-      <h1>Gerenciador de Estudos 2024</h1>
+      <h1>Gerenciador de Estudos</h1>
 
       <div className="input-container">
         <label>Dia:</label>
@@ -57,6 +72,7 @@ function App() {
           type="text"
           value={atividade}
           onChange={(e) => setAtividade(e.target.value)}
+          onKeyPress={handleKeyPress} // Adiciona a função para capturar a tecla Enter
           placeholder="Ex: Matemática"
         />
         <button onClick={adicionarAtividade}>Adicionar Estudo</button>
@@ -66,13 +82,25 @@ function App() {
         <div key={dia} className="dia-container">
           <h2>{dia}</h2>
           <div className="periodo-container">
-            <strong>Manhã:</strong> {estudos[dia].manha}
+            <strong>Manhã:</strong>
+            <div>{estudos[dia].manha}</div>
+            {estudos[dia].manha && (
+              <button className="button-remover" onClick={() => removerAtividade(dia, 'manha')}>x</button>
+            )}
           </div>
           <div className="periodo-container">
-            <strong>Tarde:</strong> {estudos[dia].tarde}
+            <strong>Tarde:</strong>
+            <div>{estudos[dia].tarde}</div>
+            {estudos[dia].tarde && (
+              <button className="button-remover" onClick={()=> removerAtividade(dia, 'tarde')}>x</button>
+            )}
           </div>
           <div className="periodo-container">
-            <strong>Noite:</strong> {estudos[dia].noite}
+            <strong>Noite:</strong>
+            <div>{estudos[dia].noite}</div>
+            {estudos[dia].noite && (
+              <button className="button-remover" onClick={() => removerAtividade(dia, 'noite')}>x</button>
+            )}
           </div>
         </div>
       ))}
