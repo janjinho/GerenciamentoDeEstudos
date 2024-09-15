@@ -87,7 +87,7 @@ button:hover {
   font-size: 24px;
   text-align: center;
   margin-top: 30px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .cronometro-controles {
@@ -235,4 +235,74 @@ h2 {
 }
 .tema-escuro h1{
   color: #eff3ef;
+}
+.lembretes{
+  width: 244px;
+  height: 255px;
+  margin-top: 655px;
+  margin-left: 803px;
+  position: absolute;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 65px;
+}
+
+.popup-lembrete {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 600px; /* Aumentei a largura */
+  height: 400px; /* Aumentei a altura */
+  z-index: 1000;
+  
+}
+
+.popup-content textarea {
+  width: 95%;
+  height: 250px; /* Aumentei a área de texto */
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.popup-actions button {
+  background-color: #175C47;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup-actions button:hover {
+  background-color: #90d199;
+}
+
+.tema-escuro .popup-lembrete{
+  background-color: #252525;
+  color: rgb(255, 255, 255);
+}
+.tema-escuro .popup-content textarea{
+    background-color: #252525;
+    color: white;
+}
+
+.tema-escuro .popup-actions button {
+ background-color: #666666;
+  color: white;
+
+}
+
+.popup-actions button:hover {
+  background-color: #bdbdbd;
 }

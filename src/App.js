@@ -26,6 +26,10 @@ function App() {
   // Estado para o tema
   const [temaEscuro, setTemaEscuro] = useState(false);
 
+  // Estado para controlar a visibilidade do pop-up de lembretes
+  const [mostrarLembrete, setMostrarLembrete] = useState(false);
+  const [lembreteTexto, setLembreteTexto] = useState('');
+
   // Função para adicionar atividade
   const adicionarAtividade = () => {
     if (!atividade) return;
@@ -88,6 +92,10 @@ function App() {
     const segundosRestantes = segundos % 60;
     return `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundosRestantes).padStart(2, '0')}`;
   };
+
+  // Funções para lidar com o pop-up de lembretes
+  const abrirLembrete = () => setMostrarLembrete(true);
+  const fecharLembrete = () => setMostrarLembrete(false);
 
   return (
     <div className={`app-container ${temaEscuro ? 'tema-escuro' : 'tema-claro'}`}>
@@ -174,9 +182,26 @@ function App() {
         </div>
       </div>
 
+      {/* Botão de lembretes */}
+      <button className='lembretes' onClick={abrirLembrete}>📒</button>
 
+      {/* Pop-up de lembretes */}
+      {mostrarLembrete && (
+        <div className="popup-lembrete">
+          <div className="popup-content">
+            <h2>Anotações</h2>
+            <textarea
+              value={lembreteTexto}
+              onChange={(e) => setLembreteTexto(e.target.value)}
+              placeholder="Escreva suas anotações aqui..."
+            />
+            <div className="popup-actions">
+              <button onClick={fecharLembrete}>Fechar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-    
   );
 }
 
