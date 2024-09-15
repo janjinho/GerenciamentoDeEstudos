@@ -23,6 +23,9 @@ function App() {
   const [ativo, setAtivo] = useState(false);
   const timerRef = useRef(null);
 
+  // Estado para o tema
+  const [temaEscuro, setTemaEscuro] = useState(false);
+
   // Função para adicionar atividade
   const adicionarAtividade = () => {
     if (!atividade) return;
@@ -73,6 +76,11 @@ function App() {
     setSegundos(0);
   };
 
+  // Função para alternar o tema
+  const alternarTema = () => {
+    setTemaEscuro(!temaEscuro);
+  };
+
   // Formatar os segundos no formato HH:MM:SS
   const formatarTempo = (segundos) => {
     const horas = Math.floor(segundos / 3600);
@@ -82,7 +90,12 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${temaEscuro ? 'tema-escuro' : 'tema-claro'}`}>
+      {/* Botão de tema */}
+      <button className='tema' onClick={alternarTema}>
+        {temaEscuro ? '🌞' : '🌙'}
+      </button>
+
       {/* Título */}
       <h1>Gerenciador de Estudos</h1>
 
@@ -117,7 +130,7 @@ function App() {
       {diasDaSemana.map((dia, index) => (
         <div
           key={dia}
-          className={`dia-container ${dia === 'Domingo' ? 'domingo' : dia === 'Quarta-feira' ? 'quartafeira' : dia === 'Quinta-feira' ? 'quintafeira' : ''}`} // Classes para domingo, quarta e quinta
+          className={`dia-container ${dia === 'Domingo' ? 'domingo' : dia === 'Quarta-feira' ? 'quartafeira' : dia === 'Quinta-feira' ? 'quintafeira' : ''}`}
           style={{ gridColumn: `${(index % 4) + 1}`, gridRow: `${Math.floor(index / 4) + 2}` }}
         >
           <h2>{dia}</h2>
@@ -135,16 +148,19 @@ function App() {
               <button className="button-remover" onClick={() => removerAtividade(dia, 'tarde')}>x</button>
             )}
           </div>
+          
           <div className="periodo-container">
             <strong>Noite:</strong>
             <div>{estudos[dia].noite}</div>
             {estudos[dia].noite && (
               <button className="button-remover" onClick={() => removerAtividade(dia, 'noite')}>x</button>
+              
             )}
           </div>
+          
         </div>
+        
       ))}
-
       {/* Seção do cronômetro */}
       <div className="cronometro-container">
         <h2>Cronômetro</h2>
@@ -157,7 +173,10 @@ function App() {
           <button onClick={resetCronometro}>Reset</button>
         </div>
       </div>
+
+
     </div>
+    
   );
 }
 

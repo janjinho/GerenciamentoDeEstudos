@@ -1,9 +1,10 @@
-body {
-  background-color: #274a3a;
+  body {
+  background-color: #414e46;
   color: #333;
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
+
 }
 
 .app-container {
@@ -12,7 +13,7 @@ body {
   padding: 20px;
   padding-left: 60px;
   border-radius: 15px;
-  background-color: #246845;
+  background-color:#175C47;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   
   display: grid; /* Usando grid */
@@ -27,7 +28,7 @@ body {
 }
 
 h1 {
-  color: #90d199;
+  color: #175C47;
   text-align: center;
   margin-top: 120px;
   margin-bottom: 20px;
@@ -60,7 +61,7 @@ border: none;
 }
 
 button {
-  background-color:#246845;
+  background-color:#23765d;
   color: white;
   padding: 12px;
   border: none;
@@ -103,6 +104,7 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* Primeira linha com 4 colunas */
   grid-gap: 20px; /* Espaço entre os dias */
+  
 }
 
 .dias-semana-linha-baixo {
@@ -123,7 +125,7 @@ button:hover {
 }
 
 h2 {
-  color: #246845;
+  color: #175C47;
   margin-bottom: 15px;
   font-size: 24px;
   text-align: center;
@@ -136,7 +138,8 @@ h2 {
   align-items: center;
   padding: 10px;
   border-radius: 5px;
-  background-color: #ffffff;
+  color: #000;
+  background-color: #f3f4f4;
   margin-bottom: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   word-wrap: break-word;
@@ -178,4 +181,58 @@ h2 {
 
 .quintafeira {
   margin-left: -301px;
+}
+
+.tema{
+  padding: 1px;
+  width: 50px;
+  margin-top: 2rem;
+  height: 50px; 
+  position: absolute; /* ou relative, dependendo da estrutura */
+}
+/* Estilos gerais para o tema claro */
+.tema-claro {
+  background-color: #eff3ef;
+  color: #333;
+}
+
+.tema-claro .input-container, 
+.tema-claro .cronometro-container, 
+.tema-claro .dia-container {
+  background-color: #ffffff;
+  color: #333;
+}
+
+/* Estilos gerais para o tema escuro */
+.tema-escuro {
+  background-color: #333333;
+  color: #d8ffde;
+}
+
+.tema-escuro .input-container, 
+.tema-escuro .cronometro-container, 
+.tema-escuro .dia-container {
+  background-color: #444444;
+  color: #eff3ef;
+}
+
+.tema-escuro button {
+  background-color: #666666;
+  color: #ffffff;
+}
+
+.tema-escuro button:hover {
+  background-color: #c9c9c9;
+}
+.tema-escuro h2{
+  color: #eff3ef;
+}
+.tema-escuro .input-container label {
+  display: block;
+  font-weight: bold;
+  color: #eff3ef;
+  margin-bottom: 10px;
+}
+.tema-escuro h1{
+  color: #eff3ef;
 }
