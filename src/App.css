@@ -1,5 +1,5 @@
 body {
-  background-color: #f0f8ff; /* Azul claro */
+  background-color: #f0f4f8; /* Um azul claro neutro */
   color: #333;
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -11,48 +11,50 @@ body {
   margin: 50px auto;
   padding: 20px;
   border-radius: 15px;
-  background-color: #fff; /* Fundo branco */
+  background-color: #ffffff; /* Fundo branco para contraste */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Título */
 h1 {
-  color: #ff4500; /* Cor vibrante para o título */
+  color: #003366; /* Azul escuro */
   text-align: center;
   margin-bottom: 40px;
   font-size: 36px;
 }
 
+/* Estilos para o campo de input */
 .input-container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 30px;
   padding: 20px;
-  border: 2px solid #ff4500;
+  border: 2px solid #99badd; /* Azul claro */
   border-radius: 10px;
-  background-color: #ffe6e6;
+  background-color: #e6f0fa; /* Fundo azul neutro claro */
   justify-content: space-between;
 }
 
 .input-container label {
   flex-basis: 100%;
   font-weight: bold;
-  color: #333;
+  color: #003366;
 }
 
 .input-container select,
 .input-container input {
   flex-basis: 100%;
   padding: 10px;
-  border: 2px solid #d9534f;
+  border: 2px solid #80a1c1;
   border-radius: 5px;
-  background-color: #fff5f5;
+  background-color: #ffffff;
   font-size: 16px;
 }
 
 button {
   flex-basis: 100%;
-  background-color: #ff4500;
+  background-color: #4f6d7a; /* Azul médio */
   color: white;
   padding: 12px;
   border: none;
@@ -64,15 +66,22 @@ button {
 }
 
 button:hover {
-  background-color: #dc143c;
+  background-color: #365563; /* Azul mais escuro */
 }
 
+/* Container para cada dia da semana */
 .dia-container {
   margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f8fafc; /* Um tom muito claro de azul */
+  border: 1px solid #d1e1f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Título de cada dia da semana */
 h2 {
-  color: #ff6347; /* Cor laranja para os dias da semana */
+  color: #4f6d7a; /* Azul médio */
   margin-bottom: 15px;
   font-size: 28px;
   text-align: center;
@@ -84,13 +93,14 @@ h2 {
   align-items: center;
   padding: 10px;
   border-radius: 5px;
-  background-color: #ffebeb;
+  background-color: #ffffff;
   margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #d1e1f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .periodo-container strong {
-  color: #d9534f;
+  color: #003366;
   font-size: 18px;
 }
 
@@ -99,7 +109,51 @@ h2 {
   padding-left: 15px;
   font-size: 16px;
 }
+
 .button-remover {
-  flex-basis: 5%;
-  font-family: 'Times New Roman', Times, serif;
+  background-color: #cc3e47; /* Cor vermelha suave para o botão de remover */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.button-remover:hover {
+  background-color: #a9323a;
+}
+
+/* Estilos para a área de metas */
+.metas-container {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #e6f0fa;
+  border: 2px solid #99badd;
+  margin-top: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.metas-container h2 {
+  color: #003366;
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.metas-container p {
+  font-size: 18px;
+  color: #365563;
+  text-align: center;
+}
+
+/* Estilos para o gráfico */
+canvas {
+  margin-top: 20px;
+  max-width: 100%;
 }
