@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
   const [diaSelecionado, setDiaSelecionado] = useState('Segunda-feira');
   const [periodoSelecionado, setPeriodoSelecionado] = useState('manha');
 
+  // Adicionar atividade
   const adicionarAtividade = () => {
     if (!atividade) return;
 
@@ -29,24 +30,51 @@ function App() {
       },
     }));
 
-    // Limpar os campos após adicionar
-    setAtividade('');
+    setAtividade(''); // Limpar os campos após adicionar
   };
+
+  // Captura a tecla Enter para adicionar atividade
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       adicionarAtividade();
     }
   };
-const removerAtividade = (dia, periodo) => {
-  setEstudos((prevEstudos) => ({
-    ...prevEstudos,
-    [dia]: {
-      ...prevEstudos[dia],
-      [periodo]: '',
-    },
-  }));
-};
 
+  // Remover atividade específica
+  const removerAtividade = (dia, periodo) => {
+    setEstudos((prevEstudos) => ({
+      ...prevEstudos,
+      [dia]: {
+        ...prevEstudos[dia],
+        [periodo]: '',
+      },
+    }));
+  };
+
+  // Função para resetar todas as atividades da semana
+  const resetarEstudos = () => {
+    setEstudos({
+      'Segunda-feira': { manha: '', tarde: '', noite: '' },
+      'Terça-feira': { manha: '', tarde: '', noite: '' },
+      'Quarta-feira': { manha: '', tarde: '', noite: '' },
+      'Quinta-feira': { manha: '', tarde: '', noite: '' },
+      'Sexta-feira': { manha: '', tarde: '', noite: '' },
+      'Sábado': { manha: '', tarde: '', noite: '' },
+      'Domingo': { manha: '', tarde: '', noite: '' },
+    });
+  };
+
+  // Salva e restaura os dados do local storage
+  useEffect(() => {
+    const estudosSalvos = localStorage.getItem('estudos');
+    if (estudosSalvos) {
+      setEstudos(JSON.parse(estudosSalvos));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('estudos', JSON.stringify(estudos));
+  }, [estudos]);
 
   return (
     <div className="app-container">
@@ -72,12 +100,13 @@ const removerAtividade = (dia, periodo) => {
           type="text"
           value={atividade}
           onChange={(e) => setAtividade(e.target.value)}
-          onKeyPress={handleKeyPress} // Adiciona a função para capturar a tecla Enter
+          onKeyPress={handleKeyPress} // Captura a tecla Enter para adicionar
           placeholder="Ex: Matemática"
         />
         <button onClick={adicionarAtividade}>Adicionar Estudo</button>
       </div>
 
+      {/* Exibir os dias da semana e suas atividades */}
       {diasDaSemana.map(dia => (
         <div key={dia} className="dia-container">
           <h2>{dia}</h2>
@@ -92,7 +121,7 @@ const removerAtividade = (dia, periodo) => {
             <strong>Tarde:</strong>
             <div>{estudos[dia].tarde}</div>
             {estudos[dia].tarde && (
-              <button className="button-remover" onClick={()=> removerAtividade(dia, 'tarde')}>x</button>
+              <button className="button-remover" onClick={() => removerAtividade(dia, 'tarde')}>x</button>
             )}
           </div>
           <div className="periodo-container">
@@ -104,6 +133,9 @@ const removerAtividade = (dia, periodo) => {
           </div>
         </div>
       ))}
+
+      {/* Botão para resetar todas as atividades */}
+      <button onClick={resetarEstudos} className="button-reset">Resetar Semana</button>
     </div>
   );
 }

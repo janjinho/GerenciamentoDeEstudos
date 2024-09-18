@@ -1,80 +1,83 @@
 body {
-  background-color: #f0f8ff; /* Azul claro */
+  background-color: #f4f7f6;
   color: #333;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .app-container {
-  max-width: 900px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 15px;
-  background-color: #fff; /* Fundo branco */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  color: #ff4500; /* Cor vibrante para o título */
+  color: #007bff;
   text-align: center;
-  margin-bottom: 40px;
-  font-size: 36px;
+  margin-bottom: 30px;
+  font-size: 32px;
 }
 
 .input-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 30px;
   padding: 20px;
-  border: 2px solid #ff4500;
-  border-radius: 10px;
-  background-color: #ffe6e6;
-  justify-content: space-between;
+  border-radius: 8px;
+  background-color: #e9ecef;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .input-container label {
   flex-basis: 100%;
   font-weight: bold;
-  color: #333;
+  color: #495057;
 }
 
 .input-container select,
 .input-container input {
   flex-basis: 100%;
-  padding: 10px;
-  border: 2px solid #d9534f;
-  border-radius: 5px;
-  background-color: #fff5f5;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  background-color: #ffffff;
   font-size: 16px;
 }
 
 button {
-  flex-basis: 100%;
-  background-color: #ff4500;
+  background-color: #007bff;
   color: white;
-  padding: 12px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 8px;
-  font-size: 18px;
+  border-radius: 6px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   margin-top: 10px;
 }
 
 button:hover {
-  background-color: #dc143c;
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 .dia-container {
   margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-  color: #ff6347; /* Cor laranja para os dias da semana */
-  margin-bottom: 15px;
-  font-size: 28px;
+  color: #28a745;
+  margin-bottom: 20px;
+  font-size: 24px;
   text-align: center;
 }
 
@@ -83,15 +86,15 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border-radius: 5px;
-  background-color: #ffebeb;
+  border-radius: 6px;
+  background-color: #ffffff;
   margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .periodo-container strong {
-  color: #d9534f;
-  font-size: 18px;
+  color: #007bff;
+  font-size: 16px;
 }
 
 .periodo-container div {
@@ -99,7 +102,36 @@ h2 {
   padding-left: 15px;
   font-size: 16px;
 }
+
 .button-remover {
-  flex-basis: 5%;
-  font-family: 'Times New Roman', Times, serif;
+  background-color: #dc3545;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-remover:hover {
+  background-color: #c82333;
+  transform: scale(1.1);
+}
+
+.button-reset {
+  background-color: #dc3545;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
+}
+
+.button-reset:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
 }
