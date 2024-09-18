@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
   const diasDaSemana = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'];
+  const periodos = ['manha', 'tarde', 'noite'];
 
   const [estudos, setEstudos] = useState({
     'Segunda-feira': { manha: '', tarde: '', noite: '' },
@@ -17,26 +18,30 @@ function App() {
   const [atividade, setAtividade] = useState('');
   const [diaSelecionado, setDiaSelecionado] = useState('Segunda-feira');
   const [periodoSelecionado, setPeriodoSelecionado] = useState('manha');
+  const [modoEdicao, setModoEdicao] = useState(false);
+  const [atividadeEditada, setAtividadeEditada] = useState({ dia: '', periodo: '' });
+  const [filtroPeriodo, setFiltroPeriodo] = useState('');
 
-  // Adicionar atividade
-  const adicionarAtividade = () => {
+  // Adicionar ou Editar atividade
+  const adicionarOuEditarAtividade = () => {
     if (!atividade) return;
 
     setEstudos((prevEstudos) => ({
       ...prevEstudos,
-      [diaSelecionado]: {
-        ...prevEstudos[diaSelecionado],
-        [periodoSelecionado]: atividade,
+      [modoEdicao ? atividadeEditada.dia : diaSelecionado]: {
+        ...prevEstudos[modoEdicao ? atividadeEditada.dia : diaSelecionado],
+        [modoEdicao ? atividadeEditada.periodo : periodoSelecionado]: atividade,
       },
     }));
 
-    setAtividade(''); // Limpar os campos após adicionar
+    setAtividade(''); // Limpar os campos após adicionar/editar
+    setModoEdicao(false);
   };
 
-  // Captura a tecla Enter para adicionar atividade
+  // Captura a tecla Enter para adicionar/editar atividade
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      adicionarAtividade();
+      adicionarOuEditarAtividade();
     }
   };
 
@@ -51,6 +56,15 @@ function App() {
     }));
   };
 
+  // Editar uma atividade existente
+  const editarAtividade = (dia, periodo) => {
+    setAtividadeEditada({ dia, periodo });
+    setAtividade(estudos[dia][periodo]);
+    setModoEdicao(true);
+    setDiaSelecionado(dia);
+    setPeriodoSelecionado(periodo);
+  };
+
   // Função para resetar todas as atividades da semana
   const resetarEstudos = () => {
     setEstudos({
@@ -62,6 +76,11 @@ function App() {
       'Sábado': { manha: '', tarde: '', noite: '' },
       'Domingo': { manha: '', tarde: '', noite: '' },
     });
+  };
+
+  // Função para filtrar atividades por período
+  const filtrarPorPeriodo = (periodo) => {
+    setFiltroPeriodo(periodo);
   };
 
   // Salva e restaura os dados do local storage
@@ -90,9 +109,9 @@ function App() {
 
         <label>Período:</label>
         <select value={periodoSelecionado} onChange={(e) => setPeriodoSelecionado(e.target.value)}>
-          <option value="manha">Manhã</option>
-          <option value="tarde">Tarde</option>
-          <option value="noite">Noite</option>
+          {periodos.map(periodo => (
+            <option key={periodo} value={periodo}>{periodo.charAt(0).toUpperCase() + periodo.slice(1)}</option>
+          ))}
         </select>
 
         <label>O que estudar:</label>
@@ -100,37 +119,43 @@ function App() {
           type="text"
           value={atividade}
           onChange={(e) => setAtividade(e.target.value)}
-          onKeyPress={handleKeyPress} // Captura a tecla Enter para adicionar
+          onKeyPress={handleKeyPress} // Captura a tecla Enter para adicionar/editar
           placeholder="Ex: Matemática"
         />
-        <button onClick={adicionarAtividade}>Adicionar Estudo</button>
+        <button onClick={adicionarOuEditarAtividade}>
+          {modoEdicao ? 'Salvar Alteração' : 'Adicionar Estudo'}
+        </button>
+      </div>
+
+      {/* Filtro por período */}
+      <div className="filtro-container">
+        <label>Filtrar por Período:</label>
+        <select onChange={(e) => filtrarPorPeriodo(e.target.value)}>
+          <option value="">Todos</option>
+          {periodos.map(periodo => (
+            <option key={periodo} value={periodo}>{periodo.charAt(0).toUpperCase() + periodo.slice(1)}</option>
+          ))}
+        </select>
       </div>
 
       {/* Exibir os dias da semana e suas atividades */}
       {diasDaSemana.map(dia => (
         <div key={dia} className="dia-container">
           <h2>{dia}</h2>
-          <div className="periodo-container">
-            <strong>Manhã:</strong>
-            <div>{estudos[dia].manha}</div>
-            {estudos[dia].manha && (
-              <button className="button-remover" onClick={() => removerAtividade(dia, 'manha')}>x</button>
-            )}
-          </div>
-          <div className="periodo-container">
-            <strong>Tarde:</strong>
-            <div>{estudos[dia].tarde}</div>
-            {estudos[dia].tarde && (
-              <button className="button-remover" onClick={() => removerAtividade(dia, 'tarde')}>x</button>
-            )}
-          </div>
-          <div className="periodo-container">
-            <strong>Noite:</strong>
-            <div>{estudos[dia].noite}</div>
-            {estudos[dia].noite && (
-              <button className="button-remover" onClick={() => removerAtividade(dia, 'noite')}>x</button>
-            )}
-          </div>
+          {periodos.map(periodo => (
+            filtroPeriodo === '' || filtroPeriodo === periodo ? (
+              <div key={periodo} className="periodo-container">
+                <strong>{periodo.charAt(0).toUpperCase() + periodo.slice(1)}:</strong>
+                <div>{estudos[dia][periodo]}</div>
+                {estudos[dia][periodo] && (
+                  <>
+                    <button className="button-editar" onClick={() => editarAtividade(dia, periodo)}>✎</button>
+                    <button className="button-remover" onClick={() => removerAtividade(dia, periodo)}>x</button>
+                  </>
+                )}
+              </div>
+            ) : null
+          ))}
         </div>
       ))}
 
