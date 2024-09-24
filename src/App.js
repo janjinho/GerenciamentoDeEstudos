@@ -9,13 +9,13 @@ function App() {
   const diasDaSemana = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'];
 
   const [estudos, setEstudos] = useState({
-    'Segunda-feira': { manha: '', tarde: '', noite: '', concluido: {manha: false, tarde: false, noite: false} },
-    'Terça-feira': { manha: '', tarde: '', noite: '', concluido: {manha: false, tarde: false, noite: false} },
-    'Quarta-feira': { manha: '', tarde: '', noite: '', concluido: {manha: false, tarde: false, noite: false} },
-    'Quinta-feira': { manha: '', tarde: '', noite: '', concluido: {manha: false, tarde: false, noite: false} },
-    'Sexta-feira': { manha: '', tarde: '', noite: '', concluido: {manha: false, tarde: false, noite: false} },
-    'Sábado': { manha: '', tarde: '', noite: '', concluido: {manha: false, tarde: false, noite: false} },
-    'Domingo': { manha: '', tarde: '', noite: '', concluido: {manha: false, tarde: false, noite: false} },
+    'Segunda-feira': { manha: '', tarde: '', noite: '', concluido: { manha: false, tarde: false, noite: false } },
+    'Terça-feira': { manha: '', tarde: '', noite: '', concluido: { manha: false, tarde: false, noite: false } },
+    'Quarta-feira': { manha: '', tarde: '', noite: '', concluido: { manha: false, tarde: false, noite: false } },
+    'Quinta-feira': { manha: '', tarde: '', noite: '', concluido: { manha: false, tarde: false, noite: false } },
+    'Sexta-feira': { manha: '', tarde: '', noite: '', concluido: { manha: false, tarde: false, noite: false } },
+    'Sábado': { manha: '', tarde: '', noite: '', concluido: { manha: false, tarde: false, noite: false } },
+    'Domingo': { manha: '', tarde: '', noite: '', concluido: { manha: false, tarde: false, noite: false } },
   });
 
   const [atividade, setAtividade] = useState('');
@@ -23,14 +23,12 @@ function App() {
   const [periodoSelecionado, setPeriodoSelecionado] = useState('manha');
   const [showModal, setShowModal] = useState(false);
 
-
   useEffect(() => {
     const estudosSalvos = localStorage.getItem('estudos');
     if (estudosSalvos) {
       setEstudos(JSON.parse(estudosSalvos));
     }
   }, []);
-
 
   useEffect(() => {
     localStorage.setItem('estudos', JSON.stringify(estudos));
@@ -73,6 +71,20 @@ function App() {
     }));
   };
 
+  const handleRemover = (dia, periodo) => {
+    setEstudos((prevEstudos) => ({
+      ...prevEstudos,
+      [dia]: {
+        ...prevEstudos[dia],
+        [periodo]: '',
+        concluido: {
+          ...prevEstudos[dia].concluido,
+          [periodo]: false,
+        },
+      },
+    }));
+  };
+
   const calcularProgresso = () => {
     let totalAtividades = 0;
     let atividadesConcluidas = 0;
@@ -89,7 +101,6 @@ function App() {
     return (atividadesConcluidas / totalAtividades) * 100;
   };
 
-  
   const chartData = {
     labels: diasDaSemana,
     datasets: [
@@ -147,24 +158,34 @@ function App() {
         />
         <button onClick={adicionarAtividade}>Adicionar Estudo</button>
       </div>
+
       <div className="dias-semana-grid">
-  {diasDaSemana.map(dia => (
-    <div key={dia} className="dia-container">
-      <h2>{dia}</h2>
-      {['manha', 'tarde', 'noite'].map(periodo => (
-        <div key={periodo} className="periodo-container">
-          <strong>{periodo.charAt(0).toUpperCase() + periodo.slice(1)}:</strong>
-          <div>{estudos[dia][periodo]}</div>
-          {estudos[dia][periodo] && (
-            <button className="button-concluir" onClick={() => marcarComoConcluido(dia, periodo)}>
-              {estudos[dia].concluido[periodo] ? 'Desmarcar' : 'Concluir'}
-            </button>
-          )}
-        </div>
-      ))}
-    </div>
-  ))}
-</div>
+        {diasDaSemana.map(dia => (
+          <div key={dia} className="dia-container">
+            <h2>{dia}</h2>
+            {['manha', 'tarde', 'noite'].map(periodo => (
+              <div key={periodo} className="periodo-container">
+                <strong>{periodo.charAt(0).toUpperCase() + periodo.slice(1)}:</strong>
+                <div>{estudos[dia][periodo]}</div>
+                {estudos[dia][periodo] && (
+                  <button
+                    className={estudos[dia].concluido[periodo] ? 'button-remover' : 'button-concluir'}
+                    onClick={() => {
+                      if (estudos[dia].concluido[periodo]) {
+                        handleRemover(dia, periodo);
+                      } else {
+                        marcarComoConcluido(dia, periodo);
+                      }
+                    }}
+                  >
+                    {estudos[dia].concluido[periodo] ? 'Remover' : 'Concluir'}
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
 
       <button className="button-progresso" onClick={() => setShowModal(true)}>
         Ver Progresso
@@ -186,4 +207,3 @@ function App() {
 }
 
 export default App;
-
